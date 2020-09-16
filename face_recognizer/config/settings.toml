@@ -1,0 +1,4 @@
+[default]
+    project_path = "@format {env[SETTINGS_PROJECT_DIR]}"
+
+    dynaconf_include = ["config.d/*.toml"]

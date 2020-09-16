@@ -1,0 +1,38 @@
+version: '3'
+services:
+  redis:
+    image: redis:6.0.8-alpine
+    networks:
+      - face_recognizer
+    volumes:
+        - data-volume:/data
+    ports:
+        - "6379:6379"
+  redmon:
+    image: vieux/redmon:latest
+    networks:
+      - face_recognizer
+    ports:
+      - "4567:4567"
+    command: ["-r", "redis://redis:6379"]
+    depends_on:
+      - redis
+  face_recognizer:
+    build:
+      dockerfile: services/Dockerfile
+      context: ..
+    networks:
+      - face_recognizer
+    environment:
+      CONF_FLASK__REDIS_URL: "redis://redis:6379/0"
+      GUNICORN_WORKERS_COUNT: "1"
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+
+networks:
+  face_recognizer:
+
+volumes:
+  data-volume:

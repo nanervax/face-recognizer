@@ -1,0 +1,117 @@
+openapi: "3.0.2"
+info:
+  title: "face_recognizer"
+  version: "3.0.2"
+
+
+servers:
+  - url: /1.0
+
+components:
+  schemas:
+    GenericError:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
+    FormError:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - field_errors
+            - non_field_error
+          properties:
+            field_errors:
+              type: object
+              additionalProperties:
+                type: string
+            non_field_error:
+              type: string
+    FaceInfo:
+      type: object
+      required:
+        - bounding_box
+        - face_points
+      properties:
+        bounding_box:
+          $ref: "#/components/schemas/BoundingBox"
+        face_points:
+          type: array
+          items:
+            $ref: "#/components/schemas/FacePoint"
+    BoundingBox:
+      type: object
+      required:
+        - left
+        - top
+        - right
+        - bottom
+      properties:
+        left:
+          type: integer
+        top:
+          type: integer
+        right:
+          type: integer
+        bottom:
+          type: integer
+    FacePoint:
+      type: object
+      required:
+        - x
+        - y
+      properties:
+        x:
+          type: integer
+        y:
+          type: integer
+
+  responses:
+    GenericError:
+      description: Generic error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+
+paths:
+  /face-info:
+    post:
+      operationId: face_recognizer.web.views.face_info
+      description: Returns recognized faces from the image
+      requestBody:
+        description: Image form
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: A list of face info
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/FaceInfo"
+                  - $ref: "#/components/schemas/FormError"
+        '413':
+          description: Image is too large
+          $ref: "#/components/responses/GenericError"
+        '404':
+          description: Not found
+          $ref: "#/components/responses/GenericError"

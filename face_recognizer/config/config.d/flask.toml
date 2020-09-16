@@ -1,0 +1,12 @@
+[default.flask]
+    debug = false
+    secret_key = "foo"
+    max_content_length = 15_000_000
+    redis_url = "redis://localhost:6379/0"
+
+[testing.flask]
+    dynaconf_merge = true
+
+    debug = true
+    testing = true
+    redis_url = "redis://unknown:6379/0"

@@ -1,0 +1,4 @@
+[default]
+    # TODO: скорее всего это стоит убрать в другие хранилища в будущем
+    shape_predictor_model_path = "@format {this.PROJECT_PATH}/ml_models/shape_predictor_68_face_landmarks.dat"
+    points_per_face = 5

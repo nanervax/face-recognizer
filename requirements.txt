@@ -1,0 +1,13 @@
+flask==1.1.*
+flask-wtf==0.14.*
+dynaconf==3.1.*
+gunicorn==20.0.*
+numpy==1.19.*
+pillow==7.2.*
+connexion[swagger-ui]==2.7.*
+flask-redis==0.4.*
+
+# На машине разработчика в систему нужно поставить cmake и blas
+# на ubuntu bionic работает с cmake и libopenblas-dev-0.2.20+ds-4
+# на 5.8.7-arch-linux с cmake и cblas-3.9.0-3
+dlib==19.21.*

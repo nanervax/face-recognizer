@@ -1,0 +1,6 @@
+recursive-include face_recognizer/config *.toml
+recursive-include face_recognizer/ml_models *.dat
+recursive-include face_recognizer/web/openapi *.yaml
+include .pylintrc
+
+recursive-include face_recognizer/tests *

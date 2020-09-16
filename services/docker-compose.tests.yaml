@@ -1,0 +1,9 @@
+version: '3'
+services:
+  face_recognizer_test:
+    build:
+      dockerfile: services/Dockerfile
+      context: ..
+      args:
+        PIP_EXTRAS: dev
+    command: ["pytest", "--pyargs", "face_recognizer", "-o", "cache_dir=/tmp"]

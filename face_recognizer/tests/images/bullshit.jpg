@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.8)
+project(tetris)
+
+set(CMAKE_CXX_STANDARD 11)
+
+set(SOURCE_FILES main.cpp core/Game.cpp core/Game.h core/Figure.cpp core/Figure.h core/Templates.h core/Elements.h core/GameField.cpp core/GameField.h)
+add_executable(tetris ${SOURCE_FILES})

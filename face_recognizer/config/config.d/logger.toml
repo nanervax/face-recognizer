@@ -1,0 +1,21 @@
+[default.logger]
+    version = 1
+
+[default.logger.formatters.simple_formatter]
+    class = "logging.Formatter"
+    format = "%(asctime)s: %(message)s"
+    datefmt = "%Y-%m-%d %H:%M:%S"
+
+[default.logger.handlers.console]
+    class = "logging.StreamHandler"
+    level = "DEBUG"
+    formatter = "simple_formatter"
+
+[default.logger.loggers.root]
+    handlers = ["console"]
+    level = "DEBUG"
+
+[default.logger.loggers.gunicorn]
+    handlers = ["console"]
+    level = "DEBUG"
+
