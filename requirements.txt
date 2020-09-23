@@ -8,6 +8,7 @@ connexion[swagger-ui]==2.7.*
 flask-redis==0.4.*
 
 # На машине разработчика в систему нужно поставить cmake и blas
-# на ubuntu bionic работает с cmake и libopenblas-dev-0.2.20+ds-4
+# на ubuntu 18.04 работает с cmake и libopenblas-dev-0.2.20+ds-4
+# на ubuntu 20.04 работает с cmake и libopenblas0=0.3.8+ds-1
 # на 5.8.7-arch-linux с cmake и cblas-3.9.0-3
 dlib==19.21.*

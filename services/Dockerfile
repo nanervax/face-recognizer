@@ -10,14 +10,14 @@ RUN $PIP install -U pip
 COPY . /dist/
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends cmake libopenblas-dev=0.2.20+ds-4
+    && apt-get install -y --no-install-recommends cmake libopenblas0=0.3.8+ds-1
 
 RUN if [ "$PIP_EXTRAS" != "" ]; then $PIP install /dist/[$PIP_EXTRAS]; else $PIP install /dist/; fi && $PIP check
 
 
 FROM snakepacker/python:3.8 as face_recognizer
 
-RUN apt-get update && apt-get install -y --no-install-recommends libopenblas-dev=0.2.20+ds-4
+RUN apt-get update && apt-get install -y --no-install-recommends libopenblas0=0.3.8+ds-1
 
 RUN groupadd --gid 10000 user \
   && useradd --uid 10000 --gid user --shell /bin/bash --create-home user
